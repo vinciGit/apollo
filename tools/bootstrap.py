@@ -214,11 +214,9 @@ def setup_common_dirs(environ_cp):
 
 def setup_python(environ_cp):
     """Setup python related env variables."""
-    if not _INTERACTIVE_MODE:
-        setup_python_non_interactively(environ_cp)
+    if not _INTERACTIVE_MODE:        setup_python_non_interactively(environ_cp)
     else:
         setup_python_interactively(environ_cp)
-
 
 def setup_python_non_interactively(environ_cp):
     """Setup python related env variables non-interactively."""
@@ -452,9 +450,9 @@ def check_bazel_version(min_version):
 
     stderr = open(os.devnull, 'wb')
     curr_version = run_shell(
-        ['bazel', '--version'], allow_non_zero=True, stderr=stderr)
+        ['bazel', '--version'], allow_non_zero=True, stderr=stderr)    //bazel 3.7.1
     if curr_version.startswith('bazel '):
-        curr_version = curr_version.split('bazel ')[1]
+        curr_version = curr_version.split('bazel ')[1]                 //3.7.1
 
     min_version_int = convert_version_to_int(min_version)
     curr_version_int = convert_version_to_int(curr_version)

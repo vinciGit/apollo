@@ -82,7 +82,7 @@ function apollo_env_setup() {
     info "${TAB}APOLLO_IN_DOCKER: ${APOLLO_IN_DOCKER}"
     info "${TAB}APOLLO_VERSION: ${APOLLO_VERSION}"
     if "${APOLLO_IN_DOCKER}"; then
-        info "${TAB}DOCKER_IMG: ${DOCKER_IMG##*:}"
+        info "${TAB}DOCKER_IMG: ${DOCKER_IMG##*:}"  #删除最后一个：及其左边的字符串
     fi
     info "${TAB}APOLLO_ENV: ${APOLLO_ENV}"
     info "${TAB}USE_GPU: USE_GPU_HOST=${USE_GPU_HOST} USE_GPU_TARGET=${USE_GPU_TARGET}"
@@ -150,7 +150,7 @@ function _check_command() {
 }
 
 function main() {
-    if [ "$#" -eq 0 ]; then
+    if [ "$#" -eq 0 ]; then     # 参数个数==0
         _usage
         exit 0
     fi
@@ -163,7 +163,7 @@ function main() {
     local ci_sh="${APOLLO_ROOT_DIR}/scripts/apollo_ci.sh"
 
     local cmd="$1"
-    shift
+    shift           # shift 命令每执行一次，变量的个数($#)减一，而变量值提前一位
     case "${cmd}" in
         config)
             env ${APOLLO_ENV} bash "${APOLLO_ROOT_DIR}/scripts/apollo_config.sh" "$@"
